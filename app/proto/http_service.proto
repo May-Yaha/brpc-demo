@@ -1,0 +1,22 @@
+syntax = "proto2";
+package brpc_demo.service;
+
+option cc_generic_services = true;
+
+
+// 定义请求参数
+message HttpRequest {
+  optional string input = 1;
+};
+
+// 定义响应参数
+message HttpResponse {
+  optional string output = 1;
+  optional int64 err_no = 2;
+  optional string err_msg = 3;
+  required int64 request_id = 4;
+};
+
+service HttpService {
+  rpc exec(HttpRequest) returns (HttpResponse);
+};
