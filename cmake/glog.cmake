@@ -7,7 +7,7 @@ SET(GLOG_INCLUDE_DIR "${GLOG_SOURCES_DIR}/src" CACHE PATH "gflags include direct
 ExternalProject_Add(
         extern_glog
         DOWNLOAD_DIR ${THIRD_PARTY_PATH}
-        DOWNLOAD_COMMAND rm -rf  ${GLOG_SOURCES_DIR} && git clone https://github.com/google/glog.git
+        DOWNLOAD_COMMAND cp -r ${PROJECT_SOURCE_DIR}/third_party/glog-0.5.0.tar.gz ${THIRD_PARTY_PATH} && tar -zvxf glog-0.5.0.tar.gz && mv glog-0.5.0 glog
         #CONFIGURE_COMMAND cd ${GLOG_SOURCES_DIR} && git checkout v3.4.0 && ./autogen.sh && CXXFLAGS=-fPIC ./configure
         CONFIGURE_COMMAND cd ${GLOG_SOURCES_DIR} && ./autogen.sh && CXXFLAGS=-fPIC ./configure --with-gflags=${THIRD_PARTY_PATH}
         BUILD_COMMAND cd ${GLOG_SOURCES_DIR} && make -j 4

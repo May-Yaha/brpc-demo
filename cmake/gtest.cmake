@@ -25,8 +25,7 @@ IF(WITH_TESTING)
     ExternalProject_Add(
             extern_gtest
             ${EXTERNAL_PROJECT_LOG_ARGS}
-            GIT_REPOSITORY  "https://github.com/google/googletest.git"
-            GIT_TAG         "release-1.8.0"
+            DOWNLOAD_COMMAND cp -r ${PROJECT_SOURCE_DIR}/third_party/googletest-release-1.11.0.tar.gz ${THIRD_PARTY_PATH} && tar -zvxf googletest-release-1.11.0.tar.gz && mv googletest-release-1.11.0 gtest
             PREFIX          ${GTEST_SOURCES_DIR}
             UPDATE_COMMAND  ""
             CMAKE_ARGS      -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}

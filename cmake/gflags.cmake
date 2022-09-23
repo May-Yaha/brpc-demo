@@ -14,7 +14,7 @@ INCLUDE_DIRECTORIES(${GFLAGS_INCLUDE_DIR})
 ExternalProject_Add(
         extern_gflags
         ${EXTERNAL_PROJECT_LOG_ARGS}
-        GIT_REPOSITORY  "https://github.com/gflags/gflags.git"
+        DOWNLOAD_COMMAND cp -r ${PROJECT_SOURCE_DIR}/third_party/gflags-2.2.2.tar.gz ${THIRD_PARTY_PATH} && tar -zvxf gflags-2.2.2.tar.gz && mv gflags-2.2.2 gflags
         PREFIX          ${GFLAGS_SOURCES_DIR}
         UPDATE_COMMAND  ""
         CMAKE_ARGS      -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}

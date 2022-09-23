@@ -1,13 +1,13 @@
 INCLUDE(ExternalProject)
 
-SET(PROTOBUF_SOURCES_DIR ${THIRD_PARTY_PATH}/protobuf-2.5.0)
+SET(PROTOBUF_SOURCES_DIR ${THIRD_PARTY_PATH}/protobuf)
 SET(PROTOBUF_INSTALL_DIR ${PROTOBUF_SOURCES_DIR}/output)
 SET(PROTOBUF_INCLUDE_DIR "${PROTOBUF_INSTALL_DIR}/include" CACHE PATH "gflags include directory." FORCE)
 
 ExternalProject_Add(
         extern_protobuf
         DOWNLOAD_DIR ${THIRD_PARTY_PATH}
-        DOWNLOAD_COMMAND rm -rf  ${PROTOBUF_SOURCES_DIR} && wget https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz -O protobuf-2.5.0.tar.gz && tar zxvf protobuf-2.5.0.tar.gz
+        DOWNLOAD_COMMAND cp -r ${PROJECT_SOURCE_DIR}/third_party/protobuf-2.5.0.tar.gz ${THIRD_PARTY_PATH} && tar -zvxf protobuf-2.5.0.tar.gz && mv protobuf-2.5.0 protobuf
         CONFIGURE_COMMAND cd ${PROTOBUF_SOURCES_DIR} && ./autogen.sh && CXXFLAGS=-fPIC ./configure prefix=${PROTOBUF_INSTALL_DIR}
         BUILD_COMMAND cd ${PROTOBUF_SOURCES_DIR} && make -j 12
         INSTALL_COMMAND cd ${PROTOBUF_SOURCES_DIR} && make install && cp -r ${PROTOBUF_INSTALL_DIR}/lib ${THIRD_PARTY_PATH} && cp -r ${PROTOBUF_INSTALL_DIR}/include ${THIRD_PARTY_PATH} && cp ${PROTOBUF_INSTALL_DIR}/bin/protoc ${THIRD_PARTY_PATH}/lib
